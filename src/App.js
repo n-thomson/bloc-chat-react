@@ -14,11 +14,12 @@ import './App.css';
   };
   firebase.initializeApp(config);
 
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <RoomList />
+        <RoomList firebase = {firebase} />
       </div>
     );
   }

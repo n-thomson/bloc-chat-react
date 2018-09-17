@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 class RoomList extends Component{
   constructor(props){
     super(props);
@@ -10,7 +11,7 @@ class RoomList extends Component{
   }
 
   componentDidMount(){
-    this.roomsRef.on=('child_added', snapshot =>{
+    this.roomsRef.on('child_added', snapshot =>{
       const room = snapshot.val();
       room.key = snapshot.key;
       this.setState({rooms: this.state.rooms.concat(room)});
@@ -20,7 +21,11 @@ class RoomList extends Component{
   render(){
     return(
       <div className = 'roomlist'>
-      this.state.rooms.map(room => room.key.name; )
+        <h2>Bloc Chat</h2>
+        <ul>
+          {this.state.rooms.map(room =>
+            <li key={room.key}>{room.name}</li>)}
+        </ul>
       </div>
     );
   }
