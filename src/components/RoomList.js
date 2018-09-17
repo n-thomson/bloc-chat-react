@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CreateRoom from './components/CreateRoom';
+import CreateRoom from './CreateRoom';
 
 
 class RoomList extends Component{
@@ -22,7 +22,7 @@ class RoomList extends Component{
 
   handleButtonClick(){
     this.setState({buttonStatus: true});
-    if (this.state.buttonStatus == 'true'){
+    if (this.state.buttonStatus === true){
       this.setState({buttonStatus: false});
       return <CreateRoom />;
     }
@@ -37,7 +37,6 @@ class RoomList extends Component{
           {this.state.rooms.map(room =>
             <li key={room.key}>{room.name}</li>)}
         </ul>
-        }
       </section>
     );
   }

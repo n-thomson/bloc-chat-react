@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 
-class CreateRoom extends Component{
+class CreateRoom extends Component {
   render(){
     return(
-      console.log('triggered');
+      <form>
+        <legend>Create new room</legend>
+        Enter a room name <input type = 'text'/>
+        <button>Cancel</button><button>Submit</button>
+      </form>
     );
   }
 }
