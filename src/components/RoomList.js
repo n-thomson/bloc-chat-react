@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
+import CreateRoom from './components/CreateRoom';
 
 
 class RoomList extends Component{
   constructor(props){
     super(props);
     this.state = {
-      rooms: []
+      rooms: [],
+      buttonStatus: false
     }
     this.roomsRef = this.props.firebase.database().ref('rooms');
   }
@@ -18,15 +20,25 @@ class RoomList extends Component{
     });
   }
 
+  handleButtonClick(){
+    this.setState({buttonStatus: true});
+    if (this.state.buttonStatus == 'true'){
+      this.setState({buttonStatus: false});
+      return <CreateRoom />;
+    }
+  }
+
   render(){
     return(
-      <div className = 'roomlist'>
+      <section className = 'roomlist'>
         <h2>Bloc Chat</h2>
+        <button onClick = {() => this.handleButtonClick()}>New Room</button>
         <ul>
           {this.state.rooms.map(room =>
             <li key={room.key}>{room.name}</li>)}
         </ul>
-      </div>
+        }
+      </section>
     );
   }
 }
