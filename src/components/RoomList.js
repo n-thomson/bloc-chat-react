@@ -24,8 +24,12 @@ class RoomList extends Component{
     this.state.isButtonClick ? this.setState({isButtonClick: false}) : this.setState({isButtonClick: true});
   }
 
-  render(){
+  createRoom(newRoomName){
+    console.log(newRoomName);
+    this.roomsRef.push({name: newRoomName});
+  }
 
+  render(){
     return(
       <section className = 'roomlist'>
         <h2>Bloc Chat</h2>
@@ -35,7 +39,7 @@ class RoomList extends Component{
             <li key={room.key}>{room.name}</li>)}
         </ul>
         <div id = 'create-room'>{
-          this.state.isButtonClick ? <CreateRoom /> : ''
+          this.state.isButtonClick ? <CreateRoom createRoom = {this.createRoom}/> : ''
         }
         </div>
       </section>
