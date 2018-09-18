@@ -27,19 +27,27 @@ class RoomList extends Component{
   createRoom(newRoomName){
     console.log(newRoomName);
     this.roomsRef.push({name: newRoomName});
+    this.setState({isButtonClick: false});
+  }
+
+  handleCancel(){
+    console.log('cancel triggered');
+    this.setState({isButtonClick: false});
   }
 
   render(){
     return(
       <section className = 'roomlist'>
-        <h2>Bloc Chat</h2>
-        <button onClick = {() => this.handleButtonClick()}>New Room</button>
-        <ul>
-          {this.state.rooms.map(room =>
-            <li key={room.key}>{room.name}</li>)}
-        </ul>
+        <section>
+          <h2>Bloc Chat</h2>
+          <button onClick = {() => this.handleButtonClick()}>New Room</button>
+          <ul>
+            {this.state.rooms.map(room =>
+              <li key={room.key}>{room.name}</li>)}
+          </ul>
+        </section>
         <div id = 'create-room'>{
-          this.state.isButtonClick ? <CreateRoom createRoom = {this.createRoom}/> : ''
+          this.state.isButtonClick ? <CreateRoom createRoom = {this.createRoom.bind(this)} cancel = {this.handleCancel.bind(this)}/> : ''
         }
         </div>
       </section>

@@ -11,13 +11,13 @@ class CreateRoom extends Component {
     this.setState({newRoomName : e.target.value});
   }
 
-  // handleCancel(){
-  //   this.setState({newRoomName : ''});
-  // }
-
   handleSubmit(e){
     e.preventDefault();
     this.props.createRoom(this.state.newRoomName);
+  }
+
+  handleCancelButton(){
+    this.props.cancel();
   }
 
   render(){
@@ -25,7 +25,7 @@ class CreateRoom extends Component {
       <form onSubmit = {(e) => this.handleSubmit(e)}>
         <legend>Create new room</legend>
         Enter a room name: <input type = 'text' onChange = {(e) => {this.handleChange(e)}} />
-        <button>Cancel</button><button>Submit</button>
+        <button onClick = {() => this.handleCancelButton()}>Cancel</button><button>Submit</button>
       </form>
     );
   }
