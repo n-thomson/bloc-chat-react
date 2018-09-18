@@ -7,7 +7,7 @@ class RoomList extends Component{
     super(props);
     this.state = {
       rooms: [],
-      buttonStatus: false
+      isButtonClick: false
     }
     this.roomsRef = this.props.firebase.database().ref('rooms');
   }
@@ -21,14 +21,11 @@ class RoomList extends Component{
   }
 
   handleButtonClick(){
-    this.setState({buttonStatus: true});
-    if (this.state.buttonStatus === true){
-      this.setState({buttonStatus: false});
-      return <CreateRoom />;
-    }
+    this.state.isButtonClick ? this.setState({isButtonClick: false}) : this.setState({isButtonClick: true});
   }
 
   render(){
+
     return(
       <section className = 'roomlist'>
         <h2>Bloc Chat</h2>
@@ -37,6 +34,12 @@ class RoomList extends Component{
           {this.state.rooms.map(room =>
             <li key={room.key}>{room.name}</li>)}
         </ul>
+        <div id = 'create-room'>{
+          if (this.state.isButtonClick){
+            <CreateRoom />
+          }
+        }
+        </div>
       </section>
     );
   }
