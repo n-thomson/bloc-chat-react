@@ -35,9 +35,7 @@ class RoomList extends Component{
             <li key={room.key}>{room.name}</li>)}
         </ul>
         <div id = 'create-room'>{
-          if (this.state.isButtonClick){
-            <CreateRoom />
-          }
+          this.state.isButtonClick ? <CreateRoom /> : ''
         }
         </div>
       </section>
