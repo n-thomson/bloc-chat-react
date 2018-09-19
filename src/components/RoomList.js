@@ -35,6 +35,10 @@ class RoomList extends Component{
     this.setState({isButtonClick: false});
   }
 
+  handleRoomSelect(roomKey){
+    console.log(this.state.rooms.find(room => room.key === roomKey));
+  }
+
   render(){
     return(
       <section className = 'roomlist'>
@@ -43,7 +47,7 @@ class RoomList extends Component{
           <button onClick = {() => this.handleButtonClick()}>New Room</button>
           <ul>
             {this.state.rooms.map(room =>
-              <li key={room.key}>{room.name}</li>)}
+              <li key={room.key} onClick = {() => this.handleRoomSelect(room.key)}>{room.name}</li>)}
           </ul>
         </section>
         <div id = 'create-room'>{

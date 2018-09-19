@@ -17,12 +17,18 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      activeRoom : ''
+    }
+  }
   render() {
     return (
       <div className="App">
         <RoomList firebase = {firebase} />
-        <MessageList firebase = {firebase} />
-
+        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom}/>
+        {console.log(this.state.activeRoom)}
       </div>
     );
   }
