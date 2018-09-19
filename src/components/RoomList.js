@@ -36,10 +36,12 @@ class RoomList extends Component{
   }
 
   handleRoomSelect(roomKey){
-    console.log(this.state.rooms.find(room => room.key === roomKey));
+    const room = this.state.rooms.find(room => room.key === roomKey);
+    console.log(room);
+    this.props.setActiveRoom(room);
   }
 
-  render(){
+    render(){
     return(
       <section className = 'roomlist'>
         <section>
