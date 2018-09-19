@@ -25,23 +25,15 @@ class RoomList extends Component{
   }
 
   createRoom(newRoomName){
-    console.log(newRoomName);
     this.roomsRef.push({name: newRoomName});
     this.setState({isButtonClick: false});
   }
 
   handleCancel(){
-    console.log('cancel triggered');
     this.setState({isButtonClick: false});
   }
 
-  handleRoomSelect(roomKey){
-    const room = this.state.rooms.find(room => room.key === roomKey);
-    console.log(room);
-    this.props.setActiveRoom(room);
-  }
-
-    render(){
+  render(){
     return(
       <section className = 'roomlist'>
         <section>
@@ -49,7 +41,7 @@ class RoomList extends Component{
           <button onClick = {() => this.handleButtonClick()}>New Room</button>
           <ul>
             {this.state.rooms.map(room =>
-              <li key={room.key} onClick = {() => this.handleRoomSelect(room.key)}>{room.name}</li>)}
+              <li key={room.key} onClick = {() => this.props.setActiveRoom(room)}>{room.name}</li>)}
           </ul>
         </section>
         <div id = 'create-room'>{

@@ -4,7 +4,8 @@ class MessageList extends Component{
   constructor(props){
     super(props);
     this.state = {
-      msgs : []
+      msgs : [],
+      roomMsgs : []
     }
     this.msgsRef = this.props.firebase.database().ref('msgs');
   }
@@ -19,9 +20,13 @@ class MessageList extends Component{
   }
 
   render(){
+    const activeRoomKey = this.props.activeRoom.key;
+    const newMsgList = this.state.msgs.filter(msg => msg.roomId === activeRoomKey);
+    console.log(newMsgList);
+    this.setState({roomMsgs : newMsgList});
     return(
       <div id ='messages-list'>
-      {this.state.msgs.map(msg =>
+        {this.state.msgs.map(msg =>
         <div key = {msg.key}>
           <h3>{msg.roomId}</h3>
           <h5>{msg.username}</h5>
