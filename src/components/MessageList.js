@@ -4,7 +4,7 @@ class MessageList extends Component{
   constructor(props){
     super(props);
     this.state = {
-      msgs : [],
+      msgs : []
     }
     this.msgsRef = this.props.firebase.database().ref('msgs');
   }
