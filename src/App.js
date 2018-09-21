@@ -31,8 +31,9 @@ class App extends Component {
   }
 
   setUser(user){
-    this.setState({user : user.displayName});
+    this.setState({user : user});
   }
+
 
   render() {
     return(
@@ -43,7 +44,7 @@ class App extends Component {
           </nav>
         </header>
         <RoomList firebase = {firebase} setActiveRoom = {this.setActiveRoom.bind(this)} />
-        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom}/>
+        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom} user = {this.state.user}/>
       </div>
     );
   }

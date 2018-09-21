@@ -14,12 +14,12 @@ class User extends Component{
 
   triggerSignOut(){
     this.props.firebase.auth().signOut();
-    this.setState({isLoggedIn : false})
+    this.props.setUser('Guest');
   }
 
   componentDidMount(){
     this.props.firebase.auth().onAuthStateChanged( user => {
-    this.props.setUser(user);
+    this.props.setUser(user.displayName);
     this.setState({isLoggedIn : true})
     });
   }
@@ -28,7 +28,7 @@ class User extends Component{
     return(
       <div>
         <button onClick = {() => this.triggerSignIn()}>Sign In</button>
-        {this.state.isLoggedIn ? <span>Welcome {this.props.user}</span> : <span>Welcome Guest</span>}
+        {this.state.isLoggedIn ? <span>Welcome {this.props.user}</span> : ''}
         <button onClick = {() => this.triggerSignOut()}>Sign Out</button>
       </div>
     );
