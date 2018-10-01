@@ -19,11 +19,17 @@ class CreateRoom extends Component {
     this.props.cancel();
   }
 
+  handleEnter(e){
+    if(e.which === 13){
+      this.handleSubmit(e);
+    }
+  }
+
   render(){
     return(
-      <form onSubmit = {(e) => this.handleSubmit(e)}>
+      <form onSubmit = {(e) => this.handleSubmit(e)} >
         <legend>Create new room</legend>
-        Enter a room name: <input type = 'text' onChange = {(e) => {this.handleChange(e)}} />
+        Enter a room name: <input type = 'text' onChange = {(e) => {this.handleChange(e)}} onKeyPress = {(e) => this.handleEnter(e)}/>
         <button onClick = {() => this.handleCancelButton()}>Cancel</button><button>Submit</button>
       </form>
     );
