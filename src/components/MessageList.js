@@ -17,11 +17,21 @@ class MessageList extends Component{
       msg.key = snapshot.key;
       this.setState({msgs: this.state.msgs.concat(msg)});
     })
+    this.msgsRef.on('child_removed', snapshot => {
+      this.setState({msgs: this.state.msgs.filter((msg) => msg.key!=snapshot.key)});
+    });
   }
 
   submitMsg(newMsg){
-
     this.msgsRef.push({content: newMsg, roomId: this.props.activeRoom.key, sentAt: moment(Date(this.props.firebase.database.ServerValue.TIMESTAMP)).format("MM/DD/YYYY hh:mm a"), username: this.props.user});
+  }
+
+  handleMsgDelete(msg){
+    this.msgsRef.child(msg.key).remove();
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.state.msgs.filter(msg => msg.roomId === nextProps.deleteRoom.key).forEach(msg => this.handleMsgDelete(msg));
   }
 
   render(){
@@ -31,7 +41,7 @@ class MessageList extends Component{
         {this.state.msgs.filter(msg => msg.roomId === this.props.activeRoom.key).map(msg =>
         <div key = {msg.key}>
           <h4>{msg.username}</h4>
-          <p>{msg.content}</p><span>{msg.sentAt}</span>
+          <p>{msg.content} <button onClick = {() => this.handleMsgDelete(msg)}>Delete Msg</button></p><span>{msg.sentAt}</span>
         </div>)}
         {this.props.activeRoom === '' ? '' : <SendMsg user = {this.props.user} submitMsg = {this.submitMsg.bind(this)}/> }
       </div>

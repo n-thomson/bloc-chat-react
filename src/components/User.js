@@ -28,7 +28,7 @@ class User extends Component{
     return(
       <div>
         <button onClick = {() => this.triggerSignIn()}>Sign In</button>
-        {this.state.isLoggedIn ? <span>Welcome {this.props.user}</span> : ''}
+        {this.state.isLoggedIn ? <span>Welcome {this.props.user}</span> : <span>Welcome {this.props.user}</span>}
         <button onClick = {() => this.triggerSignOut()}>Sign Out</button>
       </div>
     );

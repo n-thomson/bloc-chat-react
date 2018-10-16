@@ -18,6 +18,9 @@ class RoomList extends Component{
       room.key = snapshot.key;
       this.setState({rooms: this.state.rooms.concat(room)});
     });
+    this.roomsRef.on('child_removed', snapshot => {
+      this.setState({rooms: this.state.rooms.filter((room) => room.key!=snapshot.key)});
+    });
   }
 
   handleButtonClick(){
@@ -33,6 +36,11 @@ class RoomList extends Component{
     this.setState({isButtonClick: false});
   }
 
+  handleRoomDelete(room){
+    this.roomsRef.child(room.key).remove();
+    this.props.setDeleteRoom(room);
+  }
+
   render(){
     return(
       <section className = 'roomlist'>
@@ -41,7 +49,7 @@ class RoomList extends Component{
           <button onClick = {() => this.handleButtonClick()}>New Room</button>
           <ul>
             {this.state.rooms.map(room =>
-              <li key={room.key} onClick = {() => this.props.setActiveRoom(room)}>{room.name}</li>)}
+              <li key={room.key} onClick = {() => this.props.setActiveRoom(room)}>{room.name} <button onClick = {() => this.handleRoomDelete(room)}>Delete</button></li>)}
           </ul>
         </section>
         <div id = 'create-room'>{

@@ -22,7 +22,8 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom : '',
-      user : ''
+      user : 'Guest',
+      deleteRoom : ''
       }
   }
 
@@ -31,9 +32,13 @@ class App extends Component {
   }
 
   setUser(user){
-    this.setState({user : user});
+    this.setState({user: user});
   }
 
+  setDeleteRoom(room){
+    this.setState({deleteRoom: room});
+    // this.setActiveRoom('');
+  }
 
   render() {
     return(
@@ -43,8 +48,8 @@ class App extends Component {
             <User firebase = {firebase} setUser = {this.setUser.bind(this)} user = {this.state.user}/>
           </nav>
         </header>
-        <RoomList firebase = {firebase} setActiveRoom = {this.setActiveRoom.bind(this)} />
-        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom} user = {this.state.user}/>
+        <RoomList firebase = {firebase} setActiveRoom = {(room) => this.setActiveRoom(room)} setDeleteRoom = {(room)=> this.setDeleteRoom(room)} />
+        <MessageList firebase = {firebase} activeRoom = {this.state.activeRoom} user = {this.state.user} deleteRoom = {this.state.deleteRoom} />
       </div>
     );
   }
